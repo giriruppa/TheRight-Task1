@@ -1,13 +1,6 @@
 Project live Link --  https://therightdoctorstask1.netlify.app/people  
 
 
-
-
-Here is a clean and professional `README.md` file tailored for your **Angular 7/8 People Manager SPA** project:
-
----
-
-````markdown
 # 👥 People Manager (Angular 7/8 SPA)
 
 A simple **Single Page Application (SPA)** built using **Angular 7/8** for managing a list of people. This app demonstrates basic CRUD operations with a modular component-based architecture and mock API support.
@@ -128,7 +121,4 @@ This project is licensed under the MIT License.
 Ruppa Giridhar
 📧 [giriruppa964@gmail.com](mailto:giriruppa964@gmail.com)
 📱 +91-89783-04323
-
-
-
 
