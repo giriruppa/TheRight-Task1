@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>People Manager</h1>
+  
+  <div class="actions">
+    <div class="search-container">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        (input)="search()" 
+        placeholder="Search people..." 
+        class="search-input"
+      />
+    </div>
+    <button class="add-button" [routerLink]="['/people/new']">+ Add Person</button>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading people...</p>
+  </div>
+
+  <div *ngIf="!isLoading && filteredPeople.length === 0" class="no-results">
+    <p>No people found. Try a different search or add a new person.</p>
+  </div>
+
+  <div *ngIf="!isLoading && filteredPeople.length > 0" class="people-grid">
+    <table class="people-table">
+      <thead>
+        <tr>
+          <th (click)="sortData('firstName')">First Name {{ getSortIcon('firstName') }}</th>
+          <th (click)="sortData('lastName')">Last Name {{ getSortIcon('lastName') }}</th>
+          <th (click)="sortData('email')">Email {{ getSortIcon('email') }}</th>
+          <th (click)="sortData('department')">Department {{ getSortIcon('department') }}</th>
+          <th (click)="sortData('position')">Position {{ getSortIcon('position') }}</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of filteredPeople">
+          <td>{{ person.firstName }}</td>
+          <td>{{ person.lastName }}</td>
+          <td>{{ person.email }}</td>
+          <td>{{ person.department }}</td>
+          <td>{{ person.position }}</td>
+          <td class="actions-cell">
+            <button class="edit-button" [routerLink]="['/people/edit', person.id]">Edit</button>
+            <button class="delete-button" (click)="confirmDelete(person, $event)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="container">
+  <h1>{{ isNewPerson ? 'Add New Person' : 'Edit Person' }}</h1>
+  
+  <div *ngIf="isLoading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading person data...</p>
+  </div>
+
+  <div *ngIf="!isLoading" class="form-container">
+    <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            formControlName="firstName" 
+            [class.invalid]="personForm.get('firstName')?.invalid && personForm.get('firstName')?.touched"
+          />
+          <div class="error-message" *ngIf="getFieldError('firstName')">
+            {{ getFieldError('firstName') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input 
+            type="text" 
+            id="lastName" 
+            formControlName="lastName" 
+            [class.invalid]="personForm.get('lastName')?.invalid && personForm.get('lastName')?.touched"
+          />
+          <div class="error-message" *ngIf="getFieldError('lastName')">
+            {{ getFieldError('lastName') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email" 
+            [class.invalid]="personForm.get('email')?.invalid && personForm.get('email')?.touched"
+          />
+          <div class="error-message" *ngIf="getFieldError('email')">
+            {{ getFieldError('email') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number (format: 555-123-4567)</label>
+          <input 
+            type="text" 
+            id="phone" 
+            formControlName="phone" 
+            [class.invalid]="personForm.get('phone')?.invalid && personForm.get('phone')?.touched"
+          />
+          <div class="error-message" *ngIf="getFieldError('phone')">
+            {{ getFieldError('phone') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="department">Department</label>
+          <select 
+            id="department" 
+            formControlName="department" 
+            [class.invalid]="personForm.get('department')?.invalid && personForm.get('department')?.touched"
+          >
+            <option value="">Select Department</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Finance">Finance</option>
+            <option value="Human Resources">Human Resources</option>
+            <option value="Sales">Sales</option>
+            <option value="Product">Product</option>
+            <option value="Customer Support">Customer Support</option>
+          </select>
+          <div class="error-message" *ngIf="getFieldError('department')">
+            {{ getFieldError('department') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="position">Position</label>
+          <input 
+            type="text" 
+            id="position" 
+            formControlName="position" 
+            [class.invalid]="personForm.get('position')?.invalid && personForm.get('position')?.touched"
+          />
+          <div class="error-message" *ngIf="getFieldError('position')">
+            {{ getFieldError('position') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="hireDate">Hire Date</label>
+          <input 
+            type="date" 
+            id="hireDate" 
+            formControlName="hireDate" 
+            [class.invalid]="personForm.get('hireDate')?.invalid && personForm.get('hireDate')?.touched"
+          />
+          <div class="error-message" *ngIf="getFieldError('hireDate')">
+            {{ getFieldError('hireDate') }}
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="submitError" class="submit-error">
+        {{ submitError }}
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="cancel-button" [routerLink]="['/people']">Cancel</button>
+        <button 
+          type="submit" 
+          class="save-button" 
+          [disabled]="personForm.invalid || isSubmitting"
+        >
+          <span *ngIf="isSubmitting" class="spinner-sm"></span>
+          {{ isSubmitting ? 'Saving...' : 'Save Person' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
